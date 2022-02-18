@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Module Name In Menu -->
+        <menuitem id="main_menu_fournisseurs" name="ENSAH accounting"/>
+        <!-- Etablissements Forms View -->
+        <record id="gfe_payement_frn_form_view" model="ir.ui.view">
+            <field name="name">gfe.payement_frn.form</field>
+            <field name="model">gfe.payement_frn</field>
+            <field name="arch" type="xml">
+                <form string="Types" version="7.0">
+                    <sheet>
+                        <notebook>
+                            <page string="Types">
+                                <group>
+                                    <field name="name"/>
+                                    <field name="total"/>
+                                    <field name="payment_method"/>
+                                    <field name="date"/>
+                                    <field name="compte"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Etablissements LIste View -->
+        <record model="ir.ui.view" id="gfe.payement_frn_tree">
+            <field name="name">gfe.payement_frn.tree</field>
+            <field name="model">gfe.payement_frn</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Types">
+                    <field name="name"/>
+                    <field name="total"/>
+                    <field name="payment_method"/>
+                    <field name="date"/>
+                    <field name="compte"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="payement_frn_gantt" model="ir.ui.view">
+            <field name="name">gfe.payement_frn.gantt</field>
+            <field name="model">gfe.payement_frn</field>
+            <field name="arch" type="xml">
+                <gantt string="Fournisseurs" date_delay="duree" date_start="date" color="name">
+                    <field name="name"/>
+                    <field name="date"/>
+                </gantt>
+            </field>
+
+        </record>
+
+        <!-- Graph Sub Menu Item -->
+        <record model="ir.ui.view" id="gfe.payement_frn_graph">
+            <field name="name">gfe.payement_frn.graph</field>
+            <field name="model">gfe.payement_frn</field>
+            <field name="arch" type="xml">
+                <graph string="Statistiques sur les fournisseurs" type="bar">
+                    <field name="name"/>
+                    <field name="total" operator="+"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Actions Window -->
+        <record model="ir.actions.act_window" id="action_payement_frn_seq">
+            <field name="name">Types</field>
+            <field name="res_model">gfe.payement_frn</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,gantt,graph</field>
+        </record>
+
+        <!-- Sidebar -->
+
+        <!-- Parent Sidebar Item -->
+        <menuitem name="Fournisseurs" id="section_main_menu_fournisseurs" parent="main_menu_fournisseurs" />
+        <!-- Childs -->
+        <menuitem name="Paiement fournisseurs" id="real_menu_payement_frn_1" parent="section_main_menu_fournisseurs" action="action_payement_frn_seq"/>
+    </data>
+</openerp>

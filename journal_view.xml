@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Module Name In Menu -->
+        <menuitem id="main_menu_fournisseurs" name="ENSAH accounting"/>
+        <!-- Forms View -->
+        <record id="gfe_journal_form_view" model="ir.ui.view">
+            <field name="name">gfe.journal.form</field>
+            <field name="model">gfe.journal</field>
+            <field name="arch" type="xml">
+                <form string="journal" version="7.0">
+                    <sheet>
+                        <notebook>
+                            <page string="journal">
+                                <group>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="type"/>
+                                    <field name="default_debit"/>
+                                    <field name="default_credit"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Etablissements LIste View -->
+        <record model="ir.ui.view" id="gfe.journal_tree">
+            <field name="name">gfe.journal.tree</field>
+            <field name="model">gfe.journal</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Infos  journal">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="type"/>
+                    <field name="default_debit"/>
+                    <field name="default_credit"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Actions Window -->
+        <record model="ir.actions.act_window" id="action_journal_seq">
+            <field name="name">journal</field>
+            <field name="res_model">gfe.journal</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Sidebar -->
+
+        <!-- Parent Sidebar Item -->
+        <menuitem name="journal" id="section_main_menu_journal" parent="main_menu_fournisseurs" />
+        <!-- Childs -->
+        <menuitem name="Gestion Des journaux" id="real_menu_journal" parent="section_main_menu_journal" action="action_journal_seq"/>
+    </data>
+</openerp>

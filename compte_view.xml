@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Module Name In Menu -->
+        <menuitem id="main_menu_fournisseurs" name="ENSAH accounting"/>
+        <!-- Etablissements Forms View -->
+        <record id="gfe_compte_form_view" model="ir.ui.view">
+            <field name="name">gfe.compte.form</field>
+            <field name="model">gfe.compte</field>
+            <field name="arch" type="xml">
+                <form string="Compte" version="7.0">
+                    <sheet>
+                        <notebook>
+                            <page string="compte">
+                                <group>
+                                    <field name="name"/>
+                                    <field name="type"/>
+                                    <field name="credit"/>
+                                    <field name="debit"/>
+                                    <field name="balance"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Etablissements LIste View -->
+        <record model="ir.ui.view" id="gfe.compte_tree">
+            <field name="name">gfe.compte.tree</field>
+            <field name="model">gfe.compte</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Infos  compte">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="credit"/>
+                    <field name="debit"/>
+                    <field name="balance"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Actions Window -->
+        <record model="ir.actions.act_window" id="action_compte_seq">
+            <field name="name">Compte</field>
+            <field name="res_model">gfe.compte</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Sidebar -->
+
+        <!-- Parent Sidebar Item -->
+        <menuitem name="Compte" id="section_main_menu_compte" parent="main_menu_fournisseurs" />
+        <!-- Childs -->
+        <menuitem name="Gestion Des Comptes" id="real_menu_compte" parent="section_main_menu_compte" action="action_compte_seq"/>
+    </data>
+</openerp>

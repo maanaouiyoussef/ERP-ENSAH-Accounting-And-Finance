@@ -1,0 +1,1 @@
+import gfe_fournisseurs,facture_fournisseurs,compte,journal,payement_frn,payement_method,account_type,finance_report,article,recu_achat

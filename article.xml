@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Module Name In Menu -->
+        <menuitem id="main_menu_fournisseurs" name="ENSAH accounting"/>
+        <!-- Etablissements Forms View -->
+        <record id="gfe_article_form_view" model="ir.ui.view">
+            <field name="name">gfe.article.form</field>
+            <field name="model">gfe.article</field>
+            <field name="arch" type="xml">
+                <form string="Article" version="7.0">
+                    <sheet>
+                        <notebook>
+                            <page string="Article">
+                                <group>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name='category' />
+                                    <field name="qty"/>
+                                    <field name='idfacture' />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Etablissements LIste View -->
+        <record model="ir.ui.view" id="gfe.article_tree">
+            <field name="name">gfe.article.tree</field>
+            <field name="model">gfe.article</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Article">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="qty"/>
+                    <field name='category'/>
+                    <field name='idfacture' />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Graph Sub Menu Item -->
+        <record model="ir.ui.view" id="gfe.article_graph">
+            <field name="name">gfe.article.graph</field>
+            <field name="model">gfe.article</field>
+            <field name="arch" type="xml">
+                <graph string="Statistiques sur les fournisseurs" type="bar">
+                    <field name="name"/>
+                    <field name="qty" operator="+"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Actions Window -->
+        <record model="ir.actions.act_window" id="action_article_seq">
+            <field name="name">Article</field>
+            <field name="res_model">gfe.article</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+        </record>
+
+        <!-- Sidebar -->
+
+        <!-- Parent Sidebar Item -->
+        <menuitem name="Article" id="section_main_menu_article" parent="main_menu_fournisseurs" />
+        <!-- Childs -->
+        <menuitem name="Gestion Des Articles" id="real_menu_article_1" parent="section_main_menu_article" action="action_article_seq"/>
+    </data>
+</openerp>

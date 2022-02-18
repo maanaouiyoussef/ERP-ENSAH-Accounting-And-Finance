@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Module Name In Menu -->
+        <menuitem id="main_menu_fournisseurs" name="ENSAH accounting"/>
+        <!-- Etablissements Forms View -->
+        <record id="gfe_fournisseurs_form_view" model="ir.ui.view">
+            <field name="name">gfe.fournisseurs.form</field>
+            <field name="model">gfe.fournisseurs</field>
+            <field name="arch" type="xml">
+                <form string="Fournisseurs" version="7.0">
+                    <sheet>
+                        <notebook>
+                            <page string="Facture Fournisseurs">
+                                <group>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="adresse"/>
+                                    <field name="telephone"/>
+                                    <field name="website"/>
+                                    <field name='capacity'/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Etablissements LIste View -->
+        <record model="ir.ui.view" id="gfe.fournisseurs_tree">
+            <field name="name">gfe.fournisseurs.tree</field>
+            <field name="model">gfe.fournisseurs</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Infos Fournisseurs">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="adresse"/>
+                    <field name="telephone"/>
+                    <field name="website"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Graph Sub Menu Item -->
+        <record model="ir.ui.view" id="gfe.fournisseurs_graph">
+            <field name="name">gfe.fournisseurs.graph</field>
+            <field name="model">gfe.fournisseurs</field>
+            <field name="arch" type="xml">
+                <graph string="Statistiques sur les fournisseurs" type="bar">
+                    <field name="name"/>
+                    <field name="capacity" operator="+"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Actions Window -->
+        <record model="ir.actions.act_window" id="action_fournisseurs_seq">
+            <field name="name">Fournisseurs</field>
+            <field name="res_model">gfe.fournisseurs</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+        </record>
+
+        <!-- Sidebar -->
+
+        <!-- Parent Sidebar Item -->
+        <menuitem name="Fournisseurs" id="section_main_menu_fournisseurs" parent="main_menu_fournisseurs" />
+        <!-- Childs -->
+        <menuitem name="Gestion de fournisseurs" id="real_menu_fournisseurs_1" parent="section_main_menu_fournisseurs" action="action_fournisseurs_seq"/>
+    </data>
+</openerp>

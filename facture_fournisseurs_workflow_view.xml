@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Definitions -->
+        <record model="workflow" id="gfe_facture_fournisseurs_wkf">
+            <field name="name">gfe.facture_fournisseurs.wkf</field>
+            <field name="osv">gfe.facture_fournisseurs</field>
+            <field name="on_create">True</field>
+        </record>
+
+        <!-- Activity-->
+        <record model="workflow.activity" id="gfe_facture_fournisseurs_wkf_act_draft">
+            <field name="wkf_id" ref="gfe_facture_fournisseurs_wkf" />
+            <field name="flow_start">True</field>
+            <field name="name">Draft</field>
+            <field name="kind">function</field>
+            <field name="action">_draft_func()</field>
+        </record>
+        <!-- Activity-->
+        <record model="workflow.activity" id="gfe_facture_fournisseurs_wkf_act_open">
+            <field name="wkf_id" ref="gfe_facture_fournisseurs_wkf" />
+            <field name="name">Open</field>
+            <field name="kind">function</field>
+            <field name="action">_open_func()</field>
+        </record>
+
+        <!-- Activity-->
+        <record model="workflow.activity" id="gfe_facture_fournisseurs_wkf_act_payed">
+            <field name="wkf_id" ref="gfe_facture_fournisseurs_wkf" />
+            <field name="name">Payed</field>
+            <field name="kind">function</field>
+            <field name="action">_payed_func()</field>
+        </record>
+
+
+
+        <!--  transitions -->
+        <record model="workflow.transition" id="gfe_facture_fournisseurs_wkf_t1">
+            <field name="act_from" ref="gfe_facture_fournisseurs_wkf_act_draft" />
+            <field name="act_to" ref="gfe_facture_fournisseurs_wkf_act_open" />
+            <field name="signal">open</field>
+        </record>
+
+        <record model="workflow.transition" id="gfe_facture_fournisseurs_wkf_t2">
+            <field name="act_from" ref="gfe_facture_fournisseurs_wkf_act_open" />
+            <field name="act_to" ref="gfe_facture_fournisseurs_wkf_act_payed" />
+            <field name="signal">payed</field>
+        </record>
+
+
+    </data>
+</openerp> 

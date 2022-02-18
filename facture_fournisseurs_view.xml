@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Module Name In Menu -->
+        <menuitem id="main_menu_fournisseurs" name="ENSAH accounting"/>
+        <!-- Forms View -->
+        <record id="gfe_facture_fournisseurs_form_view" model="ir.ui.view">
+            <field name="name">gfe.facture_fournisseurs.form</field>
+            <field name="model">gfe.facture_fournisseurs</field>
+            <field name="arch" type="xml">
+                <form string="Facture Fournisseurs" version="7.0">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="" />
+                        <button name='open' string="Poster" class="oe_highlight" states="draft" type="workflow"/>
+                        <button name='payed' string="Payer" class="oe_highlight" states="open" type="workflow"/>
+                    </header>
+                    <sheet>
+                        <notebook>
+                            <page string="Facture Fournisseurs">
+                                <group>
+
+                                    <field name="frn_id"/>
+                                    <field name="compte-id" />
+                                    <field name="code"/>
+                                    <field name="dateDeFacture"/>
+
+                                    <field name="total" />
+                                    <field name='article_ids' />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- LIste View -->
+        <record model="ir.ui.view" id="gfe.facture_fournisseurs_tree">
+            <field name="name">gfe.facture_fournisseurs.tree</field>
+            <field name="model">gfe.facture_fournisseurs</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Infos Facture Fournisseurs">
+
+                    <field name="code"/>
+                    <field name="frn_id"/>
+                    <field name="compte-id" />
+                    <field name="dateDeFacture"/>
+                    <field name="total" />
+                    <field name="state" />
+                    <field name='article_ids' />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Gantt Sub Menu Item -->
+        <record model="ir.ui.view" id="gfe.facture_fournisseurs_gantt">
+            <field name="name">gfe.facture_fournisseurs.gantt</field>
+            <field name="model">gfe.facture_fournisseurs</field>
+            <field name="arch" type="xml">
+                <gantt string="Facture Fournisseurs" date_start='dateDeFacture' date_delay="duree" color="name">
+                
+                    <field name="dateDeFacture"/>
+                </gantt>
+            </field>
+        </record>
+
+        <!-- Graph Sub Menu Item -->
+        <record model="ir.ui.view" id="ptr_fournisseurs_graph">
+            <field name="name">gfe.facture_fournisseurs.graph</field>
+            <field name="model">gfe.facture_fournisseurs</field>
+            <field name="arch" type="xml">
+                <graph string="Statistiques sur les fournisseurs" type="bar">
+                    <field name="frn_id"/>
+                    <field name="total" operator="+"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Actions Window -->
+        <record model="ir.actions.act_window" id="action_facture_fournisseurs_seq">
+            <field name="name">Facture Fournisseurs</field>
+            <field name="res_model">gfe.facture_fournisseurs</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,gantt,graph</field>
+        </record>
+
+        <!-- Sidebar -->
+
+        <!-- Parent Sidebar Item -->
+        <menuitem name="Fournisseurs" id="section_main_menu_fournisseurs" parent="main_menu_fournisseurs" />
+        <!-- Childs -->
+        <menuitem name="Facture Fournisseurs" id="real_menu_facture_fournisseurs" parent="section_main_menu_fournisseurs" action="action_facture_fournisseurs_seq"/>
+    </data>
+</openerp>
